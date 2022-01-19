@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+h1,
+h2 {
+  margin-bottom: 20px;
+}
+.Section {
+  display: block;
+  margin: 0 auto;
+  background-color: gray;
+}
