@@ -8,7 +8,7 @@ class Phonebook extends React.Component {
 
   state = {
     name: "",
-    tel: "",
+    number: "",
   };
 
   handleInputChange = (e) => {
@@ -26,7 +26,7 @@ class Phonebook extends React.Component {
   reset = () => {
     this.setState({
       name: "",
-      tel: "",
+      number: "",
     });
   };
 
@@ -50,9 +50,12 @@ class Phonebook extends React.Component {
         <label htmlFor={this.telId}>
           Tel
           <input
-            type="text"
-            name="tel"
-            value={this.state.tel}
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={this.state.number}
             id={this.telId}
             onChange={this.handleInputChange}
           ></input>
