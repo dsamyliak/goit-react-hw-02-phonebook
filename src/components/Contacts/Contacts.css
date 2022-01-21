@@ -1,0 +1,23 @@
+.contactItem {
+  display: block;
+  margin: 10px auto;
+  padding: 7px 15px;
+  width: 20vw;
+  border-radius: 5px 5px;
+  border-color: navy;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.contactText {
+  color: navy;
+  font-size: large;
+  font-weight: 500;
+}
+
+.contactDeleteBtn {
+  margin-left: 20px;
+  /* border: 1px solid navy; */
+  border-radius: 2px;
+  background-color: rgb(255, 207, 51);
+}

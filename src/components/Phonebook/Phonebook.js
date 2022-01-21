@@ -5,6 +5,7 @@ import { nanoid } from "nanoid";
 class Phonebook extends React.Component {
   nameId = nanoid();
   telId = nanoid();
+  idId = nanoid();
 
   state = {
     name: "",
@@ -45,10 +46,11 @@ class Phonebook extends React.Component {
             id={this.nameId}
             value={this.state.name}
             onChange={this.handleInputChange}
+            placeholder="Name: Will Smith"
           />
         </label>
         <label htmlFor={this.telId}>
-          Tel
+          Number
           <input
             type="tel"
             name="number"
@@ -58,9 +60,10 @@ class Phonebook extends React.Component {
             value={this.state.number}
             id={this.telId}
             onChange={this.handleInputChange}
+            placeholder="Number: +380001112233"
           ></input>
         </label>
-        <button type="submit" className="Add__Contact">
+        <button type="submit" className="AddContact__Btn">
           Add Contact
         </button>
       </form>
