@@ -1,13 +1,14 @@
 import React from "react";
-import "./Phonebook.css";
+import "./ContactForm.css";
 import { nanoid } from "nanoid";
 
-class Phonebook extends React.Component {
+class ContactForm extends React.Component {
+  newContactId = nanoid();
   nameId = nanoid();
   telId = nanoid();
-  idId = nanoid();
 
   state = {
+    id: "",
     name: "",
     number: "",
   };
@@ -19,6 +20,7 @@ class Phonebook extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState(prevState => prevState.id = nanoid());
     this.props.onSubmit(this.state);
     this.reset();
     // e.currentTarget.reset();
@@ -26,6 +28,7 @@ class Phonebook extends React.Component {
 
   reset = () => {
     this.setState({
+      id: "",
       name: "",
       number: "",
     });
@@ -33,11 +36,11 @@ class Phonebook extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="Phonebook__Form">
+      <form onSubmit={this.handleSubmit} className="ContactForm">
         <label htmlFor={this.nameId}>
           Name
           <input
-            className="Phonebook__Input"
+            // className="Phonebook__Input"
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -71,4 +74,4 @@ class Phonebook extends React.Component {
   }
 }
 
-export default Phonebook;
+export default ContactForm;

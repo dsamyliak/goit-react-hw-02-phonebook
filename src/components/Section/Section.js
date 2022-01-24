@@ -4,7 +4,6 @@ import propTypes from "prop-types";
 
 const Section = ({ title, children }) => (
   <section className="Section">
-    {/* <h1>{title}</h1> */}
     {children}
   </section>
 );
