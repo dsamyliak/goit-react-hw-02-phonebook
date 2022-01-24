@@ -1,11 +1,10 @@
 import "./App.css";
 import React from "react";
-// import { nanoid } from "nanoid";
-// import Section from "./components/Section";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
 import ContactItem from "./components/ContactItem";
 import Filter from "./components/Filter";
+import { nanoid } from "nanoid";
 
 class App extends React.Component {
   state = {
@@ -19,30 +18,42 @@ class App extends React.Component {
   };
 
   formSubmitHandler = (newContact) => {
+    // if (newContact.name === this.contacts.name) {
+    //   console.log(newContact.name, "old name =", this.contacts.name);
+    //   return (
+    //     alert("This name alredy added"));
+    // }
+
+    newContact.id = nanoid();
+
     this.setState((prevState) => ({
       contacts: [newContact, ...this.state.contacts],
     }));
     console.log(newContact);
   };
 
-  deleteContact = (delContactId) => {
+  deleteContact = (ContactId) => {
     console.log("delete button work");
 
     this.setState((prevState) => ({
       contacts: prevState.contacts.filter(
-        (contact) => contact.id !== delContactId
+        (contact) => contact.id !== ContactId
       ),
     }));
   };
 
-  findContact = (contactName) => {
+  changeFilter = (e) => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
+  findContact = (ContactId) => {
     const { contacts } = this.state;
     contacts.find((contact) => console.log(contact));
     console.log("find name!!!");
   };
 
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
     console.log(this.state.contacts);
 
     return (
@@ -54,11 +65,10 @@ class App extends React.Component {
         ></ContactForm>
 
         <h2 className="headerOptions">Contacts</h2>
-        <Filter
-          onFilter={this.findContact}
-          filterValue={this.props.filter}
-        ></Filter>
+
+        <Filter value={filter} onChange={this.changeFilter}></Filter>
         <ContactList
+          onFindContact={this.findContact}
           className="contactList"
           contacts={contacts}
           onDeleteContact={this.deleteContact}

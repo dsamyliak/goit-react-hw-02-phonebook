@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./ContactList.css";
-import { nanoid } from "nanoid";
 import ContactItem from "../ContactItem/";
 
 class ContactList extends Component {
@@ -10,12 +9,12 @@ class ContactList extends Component {
 
     return (
       <ul>
-        {contacts.map((contactItem) => (
-          <li key={nanoid()} className="contactItem">
-            <ContactItem contactItem={contactItem}></ContactItem>
+        {contacts.map(({ id, name, number }) => (
+          <li key={id} className="contactItem">
+            <ContactItem contactItem={{ name, number, id }}></ContactItem>
             <button
               className="contactDeleteBtn"
-              onClick={() => onDeleteContact(contactItem.id)}
+              onClick={() => onDeleteContact(id)}
             >
               Delete
             </button>

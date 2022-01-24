@@ -7,7 +7,6 @@ class ContactForm extends React.Component {
   telId = nanoid();
 
   state = {
-    id: "",
     name: "",
     number: "",
   };
@@ -19,15 +18,14 @@ class ContactForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState((prevState) => (prevState.id = nanoid()));
+
     this.props.onSubmit(this.state);
+
     this.reset();
-    // e.currentTarget.reset();
   };
 
   reset = () => {
     this.setState({
-      id: "",
       name: "",
       number: "",
     });
