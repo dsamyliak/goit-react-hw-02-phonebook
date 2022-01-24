@@ -46,15 +46,15 @@ class App extends React.Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  findContact = (ContactId) => {
-    const { contacts } = this.state;
-    contacts.find((contact) => console.log(contact));
-    console.log("find name!!!");
-  };
-
   render() {
     const { contacts, filter } = this.state;
     console.log(this.state.contacts);
+
+    const toLowerCaseFilter = this.state.filter.toLowerCase();
+
+    const filteredContacts = this.state.contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(toLowerCaseFilter)
+    );
 
     return (
       <div className="App">
@@ -70,7 +70,7 @@ class App extends React.Component {
         <ContactList
           onFindContact={this.findContact}
           className="contactList"
-          contacts={contacts}
+          contacts={filteredContacts}
           onDeleteContact={this.deleteContact}
         >
           <ContactItem></ContactItem>
