@@ -3,7 +3,6 @@ import "./ContactForm.css";
 import { nanoid } from "nanoid";
 
 class ContactForm extends React.Component {
-  newContactId = nanoid();
   nameId = nanoid();
   telId = nanoid();
 
@@ -20,7 +19,7 @@ class ContactForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState(prevState => prevState.id = nanoid());
+    this.setState((prevState) => (prevState.id = nanoid()));
     this.props.onSubmit(this.state);
     this.reset();
     // e.currentTarget.reset();
