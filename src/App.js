@@ -24,7 +24,6 @@ class App extends React.Component {
     const checkedContact = this.state.contacts.find(
       (contact) => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
-    console.log("checkedContact name is", newContact.name);
 
     if (!checkedContact) {
       newContact.id = nanoid();
@@ -33,6 +32,10 @@ class App extends React.Component {
         contacts: [newContact, ...prevState.contacts],
       }));
     } else {
+      console.log(
+        "checkedContact name is the same as old contact -",
+        newContact.name
+      );
       alert(newContact.name + " is already in contacts.");
     }
   };
@@ -64,8 +67,6 @@ class App extends React.Component {
     );
 
     console.log(contacts);
-
-    // if (true) { alert('if working in render area!!!') };
 
     //render webpage
     //______________
