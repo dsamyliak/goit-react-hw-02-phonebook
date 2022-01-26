@@ -1,6 +1,7 @@
 import React from "react";
 import "./ContactForm.css";
 import { nanoid } from "nanoid";
+import PropTypes from "prop-types";
 
 class ContactForm extends React.Component {
   nameId = nanoid();
@@ -49,6 +50,7 @@ class ContactForm extends React.Component {
             value={this.state.name}
             onChange={this.handleInputChange}
             placeholder="Name: Will Smith"
+            maxLength={100}
           />
         </label>
         <label htmlFor={this.telId}>
@@ -63,6 +65,7 @@ class ContactForm extends React.Component {
             id={this.telId}
             onChange={this.handleInputChange}
             placeholder="Number: +380001112233"
+            maxLength={15}
           ></input>
         </label>
         <button type="submit" className="AddContact__Btn">
@@ -72,5 +75,13 @@ class ContactForm extends React.Component {
     );
   }
 }
+
+ContactForm.propTypes = {
+  state: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }),
+};
 
 export default ContactForm;

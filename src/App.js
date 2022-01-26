@@ -5,9 +5,9 @@ import ContactList from "./components/ContactList";
 import ContactItem from "./components/ContactItem";
 import Filter from "./components/Filter";
 import { nanoid } from "nanoid";
+import PropTypes from "prop-types";
 
 class App extends React.Component {
-
   state = {
     contacts: [
       { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -19,26 +19,22 @@ class App extends React.Component {
   };
 
   formSubmitHandler = (newContact) => {
-
     console.log("newContact", newContact);
 
-    const checkedContact = this.state.contacts.find(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
+    const checkedContact = this.state.contacts.find(
+      (contact) => contact.name.toLowerCase() === newContact.name.toLowerCase()
+    );
     console.log("checkedContact name is", newContact.name);
-    
-      
+
     if (!checkedContact) {
-      
       newContact.id = nanoid();
 
       this.setState((prevState) => ({
         contacts: [newContact, ...prevState.contacts],
       }));
-
-    }
-    else {
+    } else {
       alert(newContact.name + " is already in contacts.");
     }
-    
   };
 
   deleteContact = (ContactId) => {
@@ -56,7 +52,6 @@ class App extends React.Component {
   };
 
   render() {
-    
     //calculating data
     //_________________
 
@@ -80,21 +75,36 @@ class App extends React.Component {
         <h1 className="headerOptions">Phonebook</h1>
         <ContactForm
           className="ContactForm"
-          onSubmit={this.formSubmitHandler} />
+          onSubmit={this.formSubmitHandler}
+        />
 
         <h2 className="headerOptions">Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
           className="ContactList"
           contacts={filteredContacts}
-          onDeleteContact={this.deleteContact}>
-          
+          onDeleteContact={this.deleteContact}
+        >
           <ContactItem />
-
         </ContactList>
       </div>
     );
-  };
+  }
+}
+
+App.propTypes = {
+  state: PropTypes.arrayOf(
+    PropTypes.shape({
+      contacts: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          number: PropTypes.string.isRequired,
+        })
+      ),
+      filter: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 export default App;
