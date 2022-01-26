@@ -1,9 +1,10 @@
 import React from "react";
 import "./ContactItem.css";
 
-const ContactItem = ({ contactItem }) => (
+
+const ContactItem = ({ name, number }) => (
   <p className="contactText">
-    {contactItem.name}: {contactItem.number}
+    {name}: {number}
   </p>
 );
 

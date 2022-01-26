@@ -7,6 +7,7 @@ import Filter from "./components/Filter";
 import { nanoid } from "nanoid";
 
 class App extends React.Component {
+
   state = {
     contacts: [
       { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
@@ -18,18 +19,26 @@ class App extends React.Component {
   };
 
   formSubmitHandler = (newContact) => {
-    // if (newContact.name === this.contacts.name) {
-    //   console.log(newContact.name, "old name =", this.contacts.name);
-    //   return (
-    //     alert("This name alredy added"));
-    // }
 
-    newContact.id = nanoid();
+    console.log("newContact", newContact);
 
-    this.setState((prevState) => ({
-      contacts: [newContact, ...this.state.contacts],
-    }));
-    console.log(newContact);
+    const checkedContact = this.state.contacts.find(contact => contact.name.toLowerCase() === newContact.name.toLowerCase());
+    console.log("checkedContact name is", newContact.name);
+    
+      
+    if (!checkedContact) {
+      
+      newContact.id = nanoid();
+
+      this.setState((prevState) => ({
+        contacts: [newContact, ...prevState.contacts],
+      }));
+
+    }
+    else {
+      alert(newContact.name + " is already in contacts.");
+    }
+    
   };
 
   deleteContact = (ContactId) => {
@@ -47,37 +56,45 @@ class App extends React.Component {
   };
 
   render() {
+    
+    //calculating data
+    //_________________
+
     const { contacts, filter } = this.state;
-    console.log(this.state.contacts);
 
-    const toLowerCaseFilter = this.state.filter.toLowerCase();
+    const toLowerCaseFilter = filter.toLowerCase();
 
-    const filteredContacts = this.state.contacts.filter((contact) =>
+    const filteredContacts = contacts.filter((contact) =>
       contact.name.toLowerCase().includes(toLowerCaseFilter)
     );
+
+    console.log(contacts);
+
+    // if (true) { alert('if working in render area!!!') };
+
+    //render webpage
+    //______________
 
     return (
       <div className="App">
         <h1 className="headerOptions">Phonebook</h1>
         <ContactForm
           className="ContactForm"
-          onSubmit={this.formSubmitHandler}
-        ></ContactForm>
+          onSubmit={this.formSubmitHandler} />
 
         <h2 className="headerOptions">Contacts</h2>
-
-        <Filter value={filter} onChange={this.changeFilter}></Filter>
+        <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
-          onFindContact={this.findContact}
-          className="contactList"
+          className="ContactList"
           contacts={filteredContacts}
-          onDeleteContact={this.deleteContact}
-        >
-          <ContactItem></ContactItem>
+          onDeleteContact={this.deleteContact}>
+          
+          <ContactItem />
+
         </ContactList>
       </div>
     );
-  }
-}
+  };
+};
 
 export default App;

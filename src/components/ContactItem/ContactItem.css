@@ -1,4 +1,5 @@
 .contactText {
+  display: inline-flex;
   color: navy;
   font-size: large;
   font-weight: 500;
